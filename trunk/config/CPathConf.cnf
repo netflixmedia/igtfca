@@ -1,0 +1,10 @@
+ConfPath = c:/ca/openssl.cnf
+RootCertPath = c:/ca/cacert.pem
+RootKeyPath = c:/ca/cakey.pem
+SpkacFolderPath = c:/ca/spkac
+OutCertsPath = c:/ca/certs
+CrlPath = c:/ca/crl.pem
+ModulesDbFilePath = c:/ca/modules.dat
+OpenSslApiLogPath = c:/ca/opensslapi.log
+SignedSpkacsFolderPath = c:/ca/signed_spkac
+OpenSslExePath = C:/Program Files/GnuWin32/bin/openssl.exe
