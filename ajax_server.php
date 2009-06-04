@@ -6,7 +6,6 @@ if(!isset($_GET["modname"]))
 $modname = $_GET["modname"];
 
 require_once("nusoap.php");
-require_once('recaptchalib.php');
 
 $url = "http://" . $_SERVER['HTTP_HOST'] . dirname($_SERVER['SCRIPT_NAME']);
 

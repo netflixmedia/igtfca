@@ -179,6 +179,12 @@ class CSignCsr {
 		$formString .= "<tr><td>Output Certificates Folder Path`:</td>"
 					. "<td>$outCertsPath<input type = 'hidden' name = 'outcerts_path' value = '" . $outCertsPath . "'</td></tr>";
 		
+		// Output User Certificates Folder Path
+		$userOutCertsPath = $pathClient->call('CPath.getPath', array('pathName' => "UserCertsPath"));
+		$formString .= "<tr><td>User Output Certificates Folder Path`:</td>"
+					. "<td>$userOutCertsPath<input type = 'hidden' name = 'user_outcerts_path' value = '"
+					. $userOutCertsPath . "'</td></tr>";
+		
 		//Days To Certify For
 		$days = isset($defca_sec_info["default_days"]) ? $defca_sec_info["default_days"] : "";
 		
@@ -224,6 +230,9 @@ class CSignCsr {
 			$formString .= "<option value = '" . $sec_name . "'>$sec_name</option>\n";
 		$formString .= "</select>\n</td></tr>";
 		
+		// User Cert Identificator
+		$formString .= "<tr><td>User Cert Identificator*:</td><td><input type = 'text' name = 'user_id' value = '" . substr(md5(uniqid()), 0, 6) . "'></td></tr>";
+		
 		// submit button
 		$formString .= "<tr><td colspan = '2' style = 'padding: 16'><center>"
 					. "` To change these values use <span class = \"link\" onmousedown=\"get_inter('CPath')\">CPath</span><br>"
@@ -246,7 +255,7 @@ class CSignCsr {
 		require_once("COpenSslApiImpl_class.php");
 		$opensslObj = new COpenSslApiImpl();
 
-		$res = $opensslObj->signSpkac($arr['conf_path'], $arr['ca_sec_name'], $arr['rootcert_path'], $arr['rootcert_key_path'], $arr['rootcert_key_pass'], $arr['spkacfile_path'], $arr['outcerts_path'], $arr['days'], $arr['md'], $arr['pol_sec'], $arr['ext_sec_name']);
+		$res = $opensslObj->signSpkac($arr['conf_path'], $arr['ca_sec_name'], $arr['rootcert_path'], $arr['rootcert_key_path'], $arr['rootcert_key_pass'], $arr['spkacfile_path'], $arr['outcerts_path'], $arr['user_outcerts_path'], $arr['days'], $arr['md'], $arr['pol_sec'], $arr['user_id'], $arr['ext_sec_name']);
 
 		if($res == 1) $ret_str = "Error in spkac signing command...";
 		else if(empty($res)) $ret_str = "Error in configuration or paths when signing SPKAC : (";
@@ -286,7 +295,7 @@ class CSignCsr {
 		return $name;
 	}
 	public function getName(){
-		return "CSR Signer";
+		return "Sign CSRs";
 	}
 }
 

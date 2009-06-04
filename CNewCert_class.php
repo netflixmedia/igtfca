@@ -202,7 +202,7 @@ class CNewCert {
 		return $name;
 	}
 	public function getName(){
-		return "Creating of CA";
+		return "Generate CA Root Cert";
 	}
 }
 ?>

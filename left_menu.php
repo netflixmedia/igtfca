@@ -8,7 +8,7 @@ $pathClient = new nusoap_client("$url/CPathSoapServer.php");
 $modulesDbFilePath = $pathClient->call('CPath.getPath', array('pathName' => "ModulesDbFilePath"));
 
 $fh = fopen($modulesDbFilePath, "r") or die("Couldn't read the modules db file!\n");
-echo "<li class = 'leftclass'>";
+echo '<ul class="leftclass">';
 while(!feof($fh))
 {
 	$line = fgets($fh);
@@ -17,9 +17,9 @@ while(!feof($fh))
 	//echo '<li onmousedown=' . ' "get_inter(' . "'" . $line . "'" . ')"> ' . $line . '</li>';
 	$nameClient = new nusoap_client("$url/" . $name_lang[0] . "SoapServer." . $name_lang[1]);
 	$name = $nameClient->call("{$name_lang[0]}.getName");
-	echo '<ul class="leftclass"><input name=' . "'" . $name_lang[0] . "'" . ' type="button" onClick=' . ' "get_inter(' . "'" . $name_lang[0] . "'" . ')" value=' . "'" . $name . "'" . ' class = "buttontest" /></ul>';
+	echo '<li class = "leftclass"><input name=' . "'" . $name_lang[0] . "'" . ' type="button" onClick=' . ' "get_inter(' . "'" . $name_lang[0] . "'" . ')" value=' . "'" . $name . "'" . ' class = "buttontest" /></li>';
 }
-echo "</li>";
+echo "</ul>";
 ?>
 
 </ul>

@@ -73,7 +73,7 @@ class CGenCrl {
 		
 		// Certificate Revokation List Path
 		$crlPath = $pathClient->call('CPath.getPath', array('pathName' => "CrlPath"));
-		$formString .= "<tr><td>Output Certificates Folder Path`:</td>"
+		$formString .= "<tr><td>Output CRLs Folder Path`:</td>"
 					. "<td>$crlPath<input type = 'hidden' name = 'crl_path' value = '" . $crlPath . "'</td></tr>";
 		
 		//Certificate Revokation List Lifetime

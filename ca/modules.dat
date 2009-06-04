@@ -1,0 +1,8 @@
+CPath php
+CNewCert php
+CReqGen php
+CSignCsr php
+CGetCert php
+CCertInfo php
+CConf php
+CGenCrl php
