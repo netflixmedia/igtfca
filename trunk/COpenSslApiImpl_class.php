@@ -3,7 +3,7 @@
 interface SslApi {
 	function genSsCert($conf_path, $key_len, $cert_path, $key_path, $pass, $subject, $days, $md, $ext_name);
 	function signSpkac($conf_path, $ca_sec_name, $rootcert_path, $rootcert_key_path, $rootcert_key_pass, $spkacfile_path,
-							$outcerts_path, $days, $md, $pol_sec, $ext_sec_name);
+									$outcerts_path, $user_outcerts_path, $days, $md, $pol_sec, $user_id, $ext_sec_name);
 	function genCrl($conf_path, $ca_sec_name, $rootcert_path, $rootcert_key_path, $rootcert_key_pass, $crl_path, $crl_days, $md);
 	function getCertSubject($cert_path);
 	function getCertText($cert_path);
@@ -48,7 +48,10 @@ class COpenSslApiImpl implements SslApi {
 	
 	public function genSsCert($conf_path, $key_len, $cert_path, $key_path, $pass, $subject, $days, $md, $ext_name) {
 		//c: command is a useless command, added here to bypass the using of multiple sets of double quotes bug of php
-		$command = "c: & " . $this->enginePath . "req -x509 -config $conf_path -newkey rsa:$key_len "
+		if(strpos(`ver`, 'Windows') !== FALSE)
+			$command = "c: & ";
+		else $command = "";
+		$command .= "c: & " . $this->enginePath . "req -x509 -config $conf_path -newkey rsa:$key_len "
 				. "-out $cert_path -outform PEM -keyout $key_path -passout pass:$pass "
 				. "-$md -subj \"$subject\" -days $days";
 		if(!empty($ext_name))
@@ -76,17 +79,19 @@ class COpenSslApiImpl implements SslApi {
 	}
 */
 	public function signSpkac($conf_path, $ca_sec_name, $rootcert_path, $rootcert_key_path, $rootcert_key_pass, $spkacfile_path,
-									$outcerts_path, $days, $md, $pol_sec, $ext_sec_name) {
+									$outcerts_path, $user_outcerts_path, $days, $md, $pol_sec, $user_id, $ext_sec_name) {
 								
 		$command = $this->enginePath . "ca -config $conf_path -name $ca_sec_name "
 				. "-cert $rootcert_path -keyfile $rootcert_key_path -passin pass:$rootcert_key_pass "
-				. "-spkac $spkacfile_path -outdir $outcerts_path -days $days -md $md -policy $pol_sec -batch";
+				. "-spkac $spkacfile_path -outdir $outcerts_path -out $user_outcerts_path/$user_id.der "
+				. "-days $days -md $md -policy $pol_sec -batch";
 		if(!empty($ext_sec_name))
 			$command .= " -extensions $ext_sec_name";
 				
-		$this->log($command);
+		system($command, $result);
 		
-		return `$command`;
+		if($result) return $result;
+		else return $this->getCertText("$user_outcerts_path/$user_id.der");
 	}
 	
 	public function genCrl($conf_path, $ca_sec_name, $rootcert_path, $rootcert_key_path, $rootcert_key_pass,
@@ -116,7 +121,10 @@ class COpenSslApiImpl implements SslApi {
 	}
 	
 	public function getCertText($cert_path) {
-		$command = $this->enginePath . "x509 -in $cert_path -noout -text";	
+		$command = $this->enginePath . "x509 -in $cert_path -noout -text";
+		
+		if(substr($cert_path, strlen($cert_path) - 3) == "der")
+			$command .= " -inform DER";
 		
 		$this->log($command);
 

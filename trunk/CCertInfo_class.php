@@ -63,7 +63,7 @@ class CCertInfo {
 	
 	public function getInterface() {
 		$formStr = "<h1><font color = '#9CF'>Choose a path of the certificate to show</font></h1>";
-		
+
 		$formStr .= "<form method = 'POST'>";
 		
 		$formStr .= "<table  border = '3' bgcolor ='#9CF'><tr><td>";
@@ -85,7 +85,18 @@ class CCertInfo {
 			}
 			closedir($handle);
 		}
-		else die("Error when opening spkac's dir!");
+		else die("Error when opening certs dir!");
+		
+		$certsDir = $pathClient->call('CPath.getPath', array('pathName' => "UserCertsPath"));
+		if($handle = opendir($certsDir)) {	// browse directory
+			while (false !== ($file = readdir($handle))) {
+				if($file != '.' && $file != '..') {
+					$formStr .= "<option value = '" . $certsDir . '/' . $file . "'>$file</option>\n";
+				}
+			}
+			closedir($handle);
+		}
+		else die("Error when opening certs dir!");
 		
 		$formStr .= "</select>\n</td></tr><BR>";
 		
@@ -103,7 +114,7 @@ class CCertInfo {
 		return $this->getText($arr['path']);
 	}
 	public function getName(){
-		return "Certificate Info";
+		return "Cert Info";
 	}
 }
 

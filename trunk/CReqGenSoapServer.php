@@ -2,7 +2,6 @@
 
 require_once("CReqGen_class.php");
 require_once('nusoap.php');
-require_once('recaptchalib.php');
 
 $debug = 1;
 

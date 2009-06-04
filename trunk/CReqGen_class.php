@@ -5,7 +5,7 @@ class CReqGen {
 		$res = "";	
 		
 		require_once('nusoap.php');
-		require_once('recaptchalib.php');
+		
 		$url = "http://" . $_SERVER['HTTP_HOST'] . dirname($_SERVER['SCRIPT_NAME']);
 		
 		//get OpenSsl config file and root cert file paths in $confPath and $cert_path
@@ -23,19 +23,22 @@ class CReqGen {
 			$polarr[$sec] = $confClient->call('CConf.getInfoForGivenSectionName', array('section_name' => $sec,
 																						'confPath' => $confPath));
 		}
-			$publickey = "6Lf5PQYAAAAAAMtDd-rlanRktDWcX2MjRb22CsUE";
-			$privatekey = "6Lf5PQYAAAAAACUI0C0SNgXrjIvNVGGAsJsNnDsC";
+
 		//put together interface form string into $res
-		$res .= "<form method = 'post'>";
-		
-		$res .= "<font color = '#9CF'>'`' - Match <br>'*' - Supplied <br>' ' - Optional</font>";
+		$res .= "<font color = '#9CF'>";
+		$res .= "'`' - Match <br>'*' - Supplied <br>' ' - Optional</font>";
 		
 		//one table for each section
 		foreach($polarr as $sections => $nameArr)
 		{
-			$res .= "<br><br><br><form method = 'post'>";
+			$res .= "<br><br><br><form method = 'post' name = 'frm' onsubmit = 'return checkValues(document.frm);'>";
 			$res .= "<table border = '5' bgcolor='#9CF'>";
+				
 			$res .= "<tr><td colspan = '2' align = 'center'>$sections</td></tr>";
+			
+			$res .= "<tr><td>Email:</td><td><input type = 'text' name = 'email'>";
+			$res .= "<tr><td colspan = '2' align = 'center'> </td></tr>";
+			
 			$res .= "<tr><td>KeyLength:    	</td><td><keygen name = 'pukey' challenge = 'mit'>";
 			foreach($nameArr as $names => $vals){
 				if ($vals == "supplied") $zvz = '*';
@@ -58,28 +61,31 @@ class CReqGen {
 				else
 					$res .= "<td><input type = 'text' name = \"$names\"></td></tr>";
 			}
-			//$res .= $publickey;
-			//$res .= $privatekey;
+			
+			/*			
+			//!!!!!!!!!!!!CAPCHA
+			require_once('recaptchalib.php');
+
+			$publickey = "6Lf5PQYAAAAAAMtDd-rlanRktDWcX2MjRb22CsUE";
+
+			# the error code from reCAPTCHA, if any
 			$error = null;
-			$res .= "recaptcha_get_html($publickey, $error);";
+
+			$res .= "<tr><td colspan = '2' align = 'center'>" . recaptcha_get_html($publickey, $error) . "</td></tr>";
+			//!!!!!!!!!!!!!!!!!!!!CAPCHA END
+*/	
+			
+			//$res .= "<tr><td colspan = '2' align = 'center'><br></td></tr>";
+			//$res .= "<tr><td>Code word</td><td><input type = 'text' name = 'code'></td></tr>";
 			
 			$res .= "<tr><td colspan = '2' align = 'center'>";
 			$res .= "<input type = 'hidden' name = 'pol_sec' value = '" . $sections . "'>";
 			$res .= "<input type = 'hidden' name = 'sub' value = 'CReqGen'>";
 			$res .= "<input type = 'submit' value = 'Generate SPKAC'>";
-			
 			$res .= "</td></tr>";
 			$res .= "</table>";
 			$res .= "</form>";
-	
-
-			
-			
 		}
-			
-			
-			
-			
 		
 		return $res;			
 	}
@@ -87,13 +93,35 @@ class CReqGen {
 	public function processData($arr) {
 		unset($arr["sub"]);
 		
+/*		# the response from reCAPTCHA
+		$resp = null;
+		
+		# reCAPTCHA
+		if (isset($arr["recaptcha_response_field"])) {
+			require_once('recaptchalib.php');
+			
+			$privatekey = "6Lf5PQYAAAAAACUI0C0SNgXrjIvNVGGAsJsNnDsC";
+ 		    $resp = recaptcha_check_answer ($privatekey,
+                                       $_SERVER["REMOTE_ADDR"],
+                                       $arr["recaptcha_challenge_field"],
+                                       $arr["recaptcha_response_field"]);
+
+ 		      if ($resp->is_valid) {
+*/
+			  
 		$form = "";
 		
 		$key = $arr["pukey"];
 		unset($arr["pukey"]);
 		
 		$pol_sec = $arr["pol_sec"];
-		unset($arr["pol_sec"]); 
+		unset($arr["pol_sec"]);
+		
+		$email = $arr["email"];
+		unset($arr["email"]);
+		
+		if(!preg_match("#^[_\.0-9a-z-]+@([0-9a-z][0-9a-z-]+\.)+[a-z]{2,6}$#", $email))
+			return "Invalid e-mail address!";
 		
 		// remove values not filled in the form so that they will not be included in the resulting spkac file
 		foreach($arr as $name => $value) {
@@ -130,6 +158,11 @@ class CReqGen {
 				//return print_r($arr, 1) . "\n\n";
 					return("Что ты тут делаешь?!?! \nWhat are you doing here?!?!\n\n{$arr[$encodedName]}[$encodedName] != {$valFromCert}[$decodedName]\n");
 			}
+			if($vals == "supplied") {
+				$encodedName = $this->decode($names, 3);
+				if(!isset($arr[$encodedName]) || $arr[$encodedName] == "")
+					return "'Supplied' fealds must be given!";
+			}
 		}
 		
 		// generation of string of spkac file (in $form)
@@ -148,6 +181,18 @@ class CReqGen {
 		
 		$form = '<h2>' . $file_name . '</h2>' . $form;
 		return $form;
+		
+
+
+/*
+
+			}
+			else 
+			{
+				$error = $resp->error;
+				return $error;
+			}
+		}*/
 	}
 	
 	// mode == 1 -  ____n. -> n.

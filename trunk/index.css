@@ -6,16 +6,20 @@
 }
 
 body{
+	margin: 0 auto;
+	padding: 0;
+}
+
+table {
 	margin:0 auto;
 	padding: 0;
-	}
-table{margin:0 auto;
-	padding: 0;
-	}
-p	{
+}
+	
+p {
 	margin:0 auto;
 	padding: 0;
-	}
+}
+
 #header{
 	background-color: #9CF;
 	height: 75px;
@@ -47,6 +51,7 @@ p	{
 .left {
 	float: left;
 	width: 253px;
+	height: 450px;
 	background-repeat: repeat-y;
 	border-right-width: 8px;
 	border-bottom-width: 8px;
@@ -59,12 +64,18 @@ p	{
 
 #cont {
 	float: left;
-	height: 500px;
-	width: 725px;
+	height: 445px;
+	width: 750px;
 	text-align: center;
 	margin-left: 5px;
 	margin-top: 5px;
 	overflow: auto;
+	border-right-width: 8px;
+	border-bottom-width: 8px;
+	border-right-style: double;
+	border-bottom-style: double;
+	border-right-color: #006BB3;
+	border-bottom-color: #006BB3;
 }
 
 .textstyle {
@@ -72,7 +83,7 @@ p	{
 }
 
 a.textstyle  {
-	text-color: red;
+	color: red;
 }
 
 a:hover {
@@ -84,38 +95,34 @@ a:hover {
 a {
 	text-transform: none;
 	text-decoration: none;
-	
-	}
+}
 
-h1.h1test{ color:red;
+h1.h1test{ 
+	color:red;
 	text-align:center;
 	margin-left:400px;
-	}
+}
 
 button{width: 30px;}
 
-li.leftclass{
+ul.leftclass{
 	list-style-type: none;
+	text-align: left;
 }
 
-ul.leftclass{
-	float:left;
-	list-style-type: none;
+li.leftclass{
 	margin-bottom: 5px;
 }
 
 .buttontest{
-	background-color: #CCC;
 	width: 150px;
-	}
+}
+
 .buttontest:hover{
-	color: #000;
-	background-color: #CCC;
 	font-weight: bold;
 	text-transform: uppercase;
 }
 
-
-
 .tabletext{
-	text-align: left;}
+	text-align: left;
+}
