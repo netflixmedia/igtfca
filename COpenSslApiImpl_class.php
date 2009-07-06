@@ -87,7 +87,9 @@ class COpenSslApiImpl implements SslApi {
 				. "-days $days -md $md -policy $pol_sec -batch";
 		if(!empty($ext_sec_name))
 			$command .= " -extensions $ext_sec_name";
-				
+		
+		$this->log($command);
+		
 		system($command, $result);
 		
 		if($result) return $result;

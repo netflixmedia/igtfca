@@ -1,0 +1,46 @@
+ [ req_distinguished_name ]
+countryName	 = Country name 
+countryName_description = (2 letter code)
+countryName_default	 = AM
+countryName_min	 = 2
+countryName_max	 = 2
+countryName_policy	=	match
+
+0.organizationName	 = Certificate Authority Organisation
+0.organizationName_default	 = ArmeSFo
+0.organizationName_policy	=	match
+
+1.organizationName	= The official acronim of your Organisation
+1.organizationName_description	= (e.g. YerPhI)
+1.organizationName_policy	=	supplied
+
+organizationalUnitName	 = Organizational unit name (Department or Laboratory)
+#organizationalUnitName_denfault	=
+organizationalUnitName_policy	=	optional
+
+commonName	 = First and last names 
+commonName_description	= (exactly as in your passport, e.g. Hakob Hakobyan)
+commonName_max	 = 64
+commonName_policy	=	supplied
+
+[ additional_data ]
+emailAddress	 = E-mail address
+emailAddress_max	 = 40
+emailAddress_policy	=	supplied
+
+phoneNumber 	=	Contact telephone number
+phoneNumber_max	=	15
+phoneNumber_policy	=	optional
+
+# [ ra ]
+#default_ra	 = RA_default
+
+# [ RA_default ]
+[ ra_contacts ]
+ra_names = ra1, ra2
+
+ra1	=	Yerevan Physics Institue
+ra1_contacts	=	Addr: Halabyan str. N<br>Email: ca@escience.am
+
+ra2	=	National Academy of Sciences of the Republic of Armenia
+ra2_contacts	=	Addr: Baghramyan str. N<br>Email: ra_nas_ra_ca@escience.am

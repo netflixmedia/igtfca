@@ -7,6 +7,7 @@ class CCertInfo {
 		"commonName" => "CN",
 		"stateOrProvinceName" => "ST",
 		"countryName" => "C",
+		"localityName" => "L",
 		"emailAddress" => "emailAddress",
 		"organizationName" => "O",
 		"organizationalUnitName" => "OU"

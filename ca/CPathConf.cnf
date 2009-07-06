@@ -1,7 +1,10 @@
-ConfPath = c:/ca/openssl.cnf
+ConfPath = c:/ca/user_req.cnf
 RootCertPath = c:/ca/cacert.pem
 RootKeyPath = c:/ca/cakey.pem
 SpkacFolderPath = c:/ca/spkac
+PemFolderPath = c:/ca/pem
+ReqSerialPath = c:/ca/req_serial
+ReqFinalTextFilePath = c:/ca/req_output.txt
 OutCertsPath = c:/ca/certs
 CrlPath = c:/ca/crl.pem
 ModulesDbFilePath = c:/ca/modules.dat

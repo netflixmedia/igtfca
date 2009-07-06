@@ -1,0 +1,16 @@
+c: & c: & "C:/Program Files/GnuWin32/bin/openssl.exe" req -x509 -config c:/ca/openssl.cnf -newkey rsa:1024 -out c:/ca/cacert.pem -outform PEM -keyout c:/ca/cakey.pem -passout pass:qwert -sha1 -subj "/C=AM/O=ArmeSFo" -days 3650 -extensions v3_ca_extension
+
+"C:/Program Files/GnuWin32/bin/openssl.exe" x509 -in c:/ca/cacert.pem -noout -text
+
+"C:/Program Files/GnuWin32/bin/openssl.exe" spkac -in c:/ca/spkac/1.spkac
+
+"C:/Program Files/GnuWin32/bin/openssl.exe" spkac -in c:/ca/spkac/1.spkac
+
+"C:/Program Files/GnuWin32/bin/openssl.exe" x509 -in c:/ca/cert_to_send_to_user/f8ca7f.der -noout -text -inform DER
+
+"C:/Program Files/GnuWin32/bin/openssl.exe" spkac -in c:/ca/spkac/2.spkac
+
+"C:/Program Files/GnuWin32/bin/openssl.exe" ca -config c:/ca/openssl.cnf -name CA_default -cert c:/ca/cacert.pem -keyfile c:/ca/cakey.pem -passin pass:qwert -in c:/ca/pem/37.pem -outdir c:/ca/certs -out c:/ca/cert_to_send_to_user/123654.der -days 365 -md sha1 -policy policy_match -batch -extensions usr_cert_extension
+
+"C:/Program Files/GnuWin32/bin/openssl.exe" x509 -in c:/ca/cert_to_send_to_user/c344e4.der -noout -text -inform DER
+

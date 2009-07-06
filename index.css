@@ -1,87 +1,6 @@
 @charset "utf-8";
 /* CSS Document */
 
-#conteiner {
-	
-}
-
-body{
-	margin: 0 auto;
-	padding: 0;
-}
-
-table {
-	margin:0 auto;
-	padding: 0;
-}
-	
-p {
-	margin:0 auto;
-	padding: 0;
-}
-
-#header{
-	background-color: #9CF;
-	height: 75px;
-	width: 100%;
-	float: left;
-	border-bottom-width: 8px;
-	border-bottom-style: double;
-	border-bottom-color: #006BB3;
-}
-
-.logo{
-	width: 253px;
-	height: 85px;
-	background-color: #9CF;
-	float: left;
-	}
-
-
-.clear {
-	clear: both;
-}
-
-#midd {
-	float: left;
-	height: 100%;
-	width: 100%;
-}
-
-.left {
-	float: left;
-	width: 253px;
-	height: 450px;
-	background-repeat: repeat-y;
-	border-right-width: 8px;
-	border-bottom-width: 8px;
-	border-right-style: double;
-	border-bottom-style: double;
-	border-right-color: #006BB3;
-	border-bottom-color: #006BB3;
-	background-color: #9CF;
-}
-
-#cont {
-	float: left;
-	height: 445px;
-	width: 750px;
-	text-align: center;
-	margin-left: 5px;
-	margin-top: 5px;
-	overflow: auto;
-	border-right-width: 8px;
-	border-bottom-width: 8px;
-	border-right-style: double;
-	border-bottom-style: double;
-	border-right-color: #006BB3;
-	border-bottom-color: #006BB3;
-}
-
-.textstyle {
-	font-family: "Comic Sans MS", cursive;
-}
-
 a.textstyle  {
 	color: red;
 }
@@ -90,6 +9,7 @@ a:hover {
 	font-size: 24px;
 	text-transform: none;
 	text-decoration: none;
+	cursor: pointer;
 }
 
 a {
@@ -97,32 +17,32 @@ a {
 	text-decoration: none;
 }
 
-h1.h1test{ 
-	color:red;
-	text-align:center;
-	margin-left:400px;
-}
-
-button{width: 30px;}
-
-ul.leftclass{
-	list-style-type: none;
-	text-align: left;
-}
-
-li.leftclass{
-	margin-bottom: 5px;
-}
-
-.buttontest{
-	width: 150px;
-}
-
-.buttontest:hover{
-	font-weight: bold;
-	text-transform: uppercase;
-}
-
-.tabletext{
-	text-align: left;
+table {
+  border-collapse: collapse;
+  border: 0px;
+  font: normal 11px verdana, arial, helvetica, sans-serif;
+  color: #363636;
+  background: #ffffff;
+  }
+caption {
+  text-align: center;
+  font: bold 18px arial, helvetica, sans-serif;
+  background: transparent;
+  padding:6px 4px 8px 0px;
+  color: #03476F;
+  text-transform: uppercase;
+  }
+td, th {
+  padding: .4em;
+  }
+tbody th, tbody td {
+  vertical-align: top;
+  text-align: left;
+  }
+.odd {
+  background: #E6E6FA;
+  }
+  
+.inputError {
+	background-color: #FFCCFF;
 }

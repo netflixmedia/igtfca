@@ -370,7 +370,7 @@ class CConf {
 	}
 	public function getName(){
 		return "Configuration";
-		}
+	}
 }
 
 ?>
