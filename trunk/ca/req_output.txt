@@ -1,0 +1,19 @@
+Now you will need to contact your Registration Authority for the latter to confirm your identity for the ArmeSFo CA.
+After you have passed the identification procedure you request will be signed by the CA, that is will be issued.
+As soon as the certificate is issued, it will be sent to the subscriber by ArmeSFo
+CA in digitally signed e-mail.
+
+Send a message to the RA using the e-mail address given below, in the RA contacts.
+The message should state that you have read the ArmeSFo CA CP/CPS (and these
+Instructions ??), you agree to follow the requirements to the users stated in these documents and
+you would like to meet with the Registration Authority personnel in order to present your CSR and
+requested documents.
+
+You will need to present the following documents and copies at the meeting:
+o Your passport,
+o Copy of your passport,
+o Official document from your Organisation stating that you are its employee,
+signed by an official representative of the Organisation and stamped by the seal
+of the Organisation. See Appendix for an example of such document.
+
+Your RA contacts are:

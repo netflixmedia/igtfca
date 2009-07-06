@@ -38,10 +38,8 @@ if(isset($_POST['sub'])) {
 	<title>Titled Document</title>
 </head>
 
-<!-- <body bgcolor="#FFFFFF" onLoad="get_inter('CReqGen');">
--->
 <body bgcolor="#FFFFFF">
-<input type="button" onclick="get_inter('CReqGen')";>
+
 <?php
 
 $form_response = "";
@@ -72,7 +70,7 @@ echo "</pre>";
 
 <div id="conteiner">
 
-<!--	<div id="header">
+<div id="header">
     <div class="logo">
     </div> 
 
@@ -88,12 +86,12 @@ echo "</pre>";
 			<?php include("left_menu.php") ?>
 		</div>
 		<span class="clear">
-		</span> -->
+		</span>
         <div id="cont">
 			<?php echo "<font color = '#9CF'>" . $form_response . "</font>" ?>
 		</div>
-<!--	</div>
-</div> -->
+</div>
+</div>
 
 </body>
 
