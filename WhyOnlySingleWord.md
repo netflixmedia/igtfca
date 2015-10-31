@@ -1,0 +1,13 @@
+# Summary goes here
+
+# Never liked wiki markup #
+
+Add your content here.
+
+
+# Although one can get used to it #
+
+Add your content here.  Format your content with:
+  * Seems to be clean
+  * And easy to learn
+  * Automatic links to other wiki pages
